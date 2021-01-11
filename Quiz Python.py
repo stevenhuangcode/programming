@@ -46,6 +46,6 @@ else:
 
 print(f" You have {correct} correct answers and {incorrect} incorrect answers")
 if (correct / (correct + incorrect)) * 100 >= 60:
-    print(f" Congrats. You passed with a score of {(correct / (correct + incorrect)) * 100} %")
+    print(f" Nice. You passed with a score of {(correct / (correct + incorrect)) * 100} %")
 elif (correct / (correct + incorrect)) * 100 <= 60:
-    print(f" Sorry. You failed with a score of {(correct / (correct + incorrect)) * 100} %")
+    print(f" Oops. You failed with a score of {(correct / (correct + incorrect)) * 100} %")
