@@ -60,13 +60,13 @@ def main():
         pygame.draw.rect(
             screen,
             first_rectangle.colour
-            (
-                first_rectangle.x
-                first_rectangle.y
-                first_rectangle.width
+            [
+                first_rectangle.x,
+                first_rectangle.y,
+                first_rectangle.width,
                 first_rectangle.height
+            ]
             )
-        )
 
         # ----- UPDATE
         pygame.display.flip()

@@ -8,6 +8,7 @@
 # velocity x/y direction
 
 import pygame
+import random
 
 # ----- CONSTANTS
 BLACK = (0, 0, 0)
@@ -18,6 +19,43 @@ WIDTH = 800
 HEIGHT = 600
 TITLE = "DVD Screensaver"
 
+class Rectangle:
+    def __init__(self, colour=WHITE):
+        self.width, self.height = (150, 80)
+        self.x, self.y = (WIDTH / 2, HEIGHT / 2)
+
+        self.colour = colour
+
+        self.vel_x = 10
+        self.vel_y = 10
+
+    def draw(self, screen):
+        pygame.draw.rect(
+            screen,
+            self.colour,
+            [
+                self.x,
+                self.y,
+                self.width,
+                self.height
+            ]
+        )
+
+    def update(self):
+        # Update the location of the block in space,
+
+        #Returns:
+            #None
+
+        self.x += self.vel_x
+        self.y += self.vel_y
+
+        # keep it in the screen
+        if self.x + self.width > WIDTH or self.x < 0:
+            self.vel_x *= -1
+
+        if self.y + self.height > HEIGHT or self.y < 0:
+            self.vel_y *= -1
 
 def main():
     pygame.init()
@@ -31,6 +69,17 @@ def main():
     done = False
     clock = pygame.time.Clock()
 
+    block_one = Rectangle((0, 255, 0))
+    block_two = Rectangle()
+    block_two.x, block_two.y = (
+        random.randrange(0, WIDTH-block_two.width),
+        random.randrange(0, HEIGHT-block_two.height)
+    )
+    block_two.vel_x, block_two.vel_y = (
+        random.choice([-4, -3, 3, 4]),
+        random.choice([-4, -3, 3, 4])
+    )
+
     # ----- MAIN LOOP
     while not done:
         # -- Event Handler
@@ -39,9 +88,14 @@ def main():
                 done = True
 
         # ----- LOGIC
+        # update the position of the block
+        block_one.update()
+        block_two.update()
 
         # ----- DRAW
         screen.fill(BLACK)
+        block_one.draw(screen)
+        block_two.draw(screen)
 
         # ----- UPDATE
         pygame.display.flip()
